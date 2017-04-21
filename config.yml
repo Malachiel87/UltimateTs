@@ -1,0 +1,61 @@
+login:
+  ip: localhost
+  username: serveradmin
+  password: serveradmin
+  virtualServerId: 1
+bot:
+  name: UltimateTS
+database:
+  enable: false
+  host: 127.0.0.1
+  name: database
+  user: root
+  password: 123456
+config:
+  permsSystem: none
+  kickNotRegister: false
+  messages:
+    poke: '[color=red]You need to register yourself before join TeamSpeak. Use ''/ts link'' IG to link your accounts.'
+    kick: 'Please register yourself.'
+  defaultGroupId: 8
+messages:
+  bot:
+    online: Bot Online!
+    offline: Bot Offline!
+  linked:
+    sucess: Your TeamSpeak and Minecraft are now linked ! Your MC Name is %mcname%.
+    ready: Your MC account is ready to be link ! Log in into TeamSpeak and get your accounts linked !
+    desc: 'MC Name: %mcname%'
+    already: Your MC and TeamSpeak are always linked, use /ts unlink to link it.
+    linked: Your MC and TeamSpeak are linked. Use /ts unlink to unlink-it.
+    info: 'Your TeamSpeak database id is %dbid%.'
+  unlinked:
+    confirmation:
+      confirmation: 'Warning: Unlink you MC and TeamSpeak account removed your servergroups
+        on TeamSpeak. Do you really want to continue ? If yes, type ''YES'' in chat
+        (WITHOUT SLASH), else type ''NO''. '
+      'yes': '&aReceived reponse YES. &rYour MC and TeamSpeak are now unlinked !'
+      'no': '&cReceived reponse NO, canceled.'
+    already: Your MC and TeamSpeak aren't linked yet!
+    unlinked: Your MC and TeamSpeak account aren't linked. Use /ts link to link-it.
+  broadcast:
+    empty: 'Your message can''t be empty.'
+    to:
+      teamspeak: '%message%.'
+      minecraft: '(On TeamSpeak) %message%.'
+      sender: 'You broadcast this message on TeamSpeak: %message%.'
+  list:
+    empty: '&cSyntax: /ts list <TS|IG>'
+    ts: '&6There are %n players online on TeamSpeak:'
+    ig: '&6There are %n players online:'
+    broadcast:
+      ts:
+        isQuery: ' &7&o(ServerQueryClient/Bot)'
+        name: '&7- &f%name% &8(&7%id%&8)'
+        ranks: '   &7Ranks &8(&f%qtt%&8): %next%'
+      ig:
+        name: '&7- &f%name% &8(&7%uuid%&8)'
+        ranks: '   &7Ranks &8(&f%qtt%&8): %next%'
+        linked:
+          linked: '   &7Linked with %name% &8(&7Id: %id%&8)&7 on TeamSpeak.'
+          nolinked: '   &7Linked: &c-'

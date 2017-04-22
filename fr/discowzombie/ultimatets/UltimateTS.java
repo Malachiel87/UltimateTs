@@ -1,8 +1,10 @@
 package fr.discowzombie.ultimatets;
 
 import java.util.HashMap;
+import java.util.logging.Level;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.discowzombie.ultimatets.functions.UtilsFunctions;
@@ -11,12 +13,14 @@ import fr.discowzombie.ultimatets.mc.TypeYesOrNo;
 import fr.discowzombie.ultimatets.mc.UltimateTSCmd;
 import fr.discowzombie.ultimatets.sql.SqlRequest;
 import fr.discowzombie.ultimatets.ts.BotManager;
+import net.milkbowl.vault.permission.Permission;
 
 public class UltimateTS extends JavaPlugin{
 	
 	public static HashMap<Player, String> p = new HashMap<>();
 	String host, dbName, user, password;
 	public SqlRequest sql;
+	public static Permission perms;
 	
 	public static UltimateTS i;
 	BotManager bm = new BotManager();
@@ -24,6 +28,21 @@ public class UltimateTS extends JavaPlugin{
 	public static UltimateTS g(){
 		return i;
 	}
+	
+	public void log(String message){
+		getLogger().log(Level.INFO, message);
+	}
+	
+	public void log(Level lvl, String message){
+		getLogger().log(lvl, message);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	private boolean setupPermissions(){
+        RegisteredServiceProvider rsp = getServer().getServicesManager().getRegistration(Permission.class);
+        perms = (Permission) rsp.getProvider();
+        return perms != null;
+      }
 	
 	@Override
 	public void onEnable() {
@@ -52,21 +71,22 @@ public class UltimateTS extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new TypeYesOrNo(sql), this);
 		
 		UtilsFunctions.getPermissionSystem(true);
+		if(UtilsFunctions.getPermissionSystem(false) == UtilsFunctions.getVault()) setupPermissions();
 		RankManager.scanIGRank();
 		
 		if((getConfig().getString("login.ip") != "") && (getConfig().getString("login.ip") != null)){
 			bm.runBot(getConfig().getString("login.ip"), getConfig().getString("login.username"), getConfig().getString("login.password"));
 		}
 		
-		System.out.println(i.getDescription().getName()+" v"+i.getDescription().getVersion()+" is enabled !");
-		System.out.println("Thank for using "+i.getDescription().getName()+" created by DiscowZombie.");
+		log(i.getDescription().getName()+" v"+i.getDescription().getVersion()+" is enabled !");
+		log("Thank for using "+i.getDescription().getName()+" created by DiscowZombie.");
 		
 		super.onEnable();
 	}
 	
 	@Override
 	public void onDisable() {
-		if(sql.useDataBase() && sql.isConnected()){
+		if(sql != null && sql.useDataBase() && sql.isConnected()){
 			sql.disconnect();
 		}
 		bm.stopBot();

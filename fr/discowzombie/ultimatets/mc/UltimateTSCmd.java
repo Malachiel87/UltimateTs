@@ -75,7 +75,7 @@ public class UltimateTSCmd implements CommandExecutor {
 					if(UtilsFunctions.isLinked(p)){
 						p.sendMessage(UltimateTS.g().getConfig().getString("messages.linked.linked").replace('&', '§'));
 						int dbId = 0;
-						if(sql.useDataBase()){
+						if(sql != null && sql.useDataBase()){
 							dbId = sql.getLinkedId(p.getUniqueId().toString());
 						}else{
 							dbId = UltimateTS.g().getConfig().getInt("linked."+p.getUniqueId().toString());

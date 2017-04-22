@@ -3,6 +3,7 @@ package fr.discowzombie.ultimatets.functions;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
@@ -12,13 +13,21 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.tyrannyofheaven.bukkit.zPermissions.ZPermissionsPlugin;
-
 import com.github.theholywaffle.teamspeak3.api.ClientProperty;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.github.theholywaffle.teamspeak3.api.wrapper.DatabaseClientInfo;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroup;
 import fr.discowzombie.ultimatets.UltimateTS;
 import fr.discowzombie.ultimatets.ts.BotManager;
+import me.lucko.luckperms.LuckPerms;
+import me.lucko.luckperms.api.Contexts;
+import me.lucko.luckperms.api.Group;
+import me.lucko.luckperms.api.LuckPermsApi;
+import me.lucko.luckperms.api.User;
+import me.lucko.luckperms.api.caching.PermissionData;
+import me.lucko.luckperms.api.caching.UserData;
+import me.lucko.luckperms.common.plugin.LuckPermsPlugin;
+import net.milkbowl.vault.Vault;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class UtilsFunctions {
@@ -54,6 +63,30 @@ public class UtilsFunctions {
 				}
 			}catch(Exception e){}
 			
+		}else if(permsS != null && permsS.equalsIgnoreCase("LuckPerms")){
+			if(displayInConsole) log(Level.INFO, "Checking for LuckPerms...");
+			try{
+				boolean lperms = Bukkit.getServer().getPluginManager().isPluginEnabled("LuckPerms");
+				if(lperms){
+					if(displayInConsole) log(Level.INFO, "LuckPerms found !");
+					return (JavaPlugin) Bukkit.getServer().getPluginManager().getPlugin("LuckPerms");
+				}else{
+					if(displayInConsole) log(Level.SEVERE, "LuckPerms not found !");
+				}
+			}catch(Exception e){}
+			
+		}else if(permsS != null && permsS.equalsIgnoreCase("Vault")){
+			if(displayInConsole) log(Level.INFO, "Checking for Vault...");
+			try{
+				boolean vault = Bukkit.getServer().getPluginManager().isPluginEnabled("Vault");
+				if(vault){
+					if(displayInConsole) log(Level.INFO, "Vault found !");
+					return (JavaPlugin) Bukkit.getServer().getPluginManager().getPlugin("Vault");
+				}else{
+					if(displayInConsole) log(Level.SEVERE, "Vault not found !");
+				}
+			}catch(Exception e){}
+			
 		}else{
 			if(displayInConsole) log(Level.WARNING, "No valid permissions system found !");
 			if(displayInConsole) log(Level.WARNING, "All ranks linking functions are disabled.");
@@ -76,6 +109,26 @@ public class UtilsFunctions {
 			boolean zPerms = Bukkit.getServer().getPluginManager().isPluginEnabled("zPermissions");
 			if(zPerms){
 				return (ZPermissionsPlugin) Bukkit.getServer().getPluginManager().getPlugin("zPermissions");
+			}
+		}catch(Exception e){}
+		return null;
+	}
+	
+	public static LuckPermsPlugin getLuckPerms(){
+		try{
+			boolean lperms = Bukkit.getServer().getPluginManager().isPluginEnabled("LuckPerms");
+			if(lperms){
+				return (LuckPermsPlugin) Bukkit.getServer().getPluginManager().getPlugin("LuckPerms");
+			}
+		}catch(Exception e){}
+		return null;
+	}
+	
+	public static Vault getVault(){
+		try{
+			boolean vault = Bukkit.getServer().getPluginManager().isPluginEnabled("Vault");
+			if(vault){
+				return (Vault) Bukkit.getServer().getPluginManager().getPlugin("Vault");
 			}
 		}catch(Exception e){}
 		return null;
@@ -161,7 +214,47 @@ public class UtilsFunctions {
 						}
 					}
 				}
+			}else if(permsSystem == UtilsFunctions.getLuckPerms()){
+				LuckPermsApi api = LuckPerms.getApi();
+				for(Group g : api.getGroups()){
+					if(p.hasPermission("group."+g.getName().toString())){
+						int rankId = UltimateTS.g().getConfig().getInt("config.perms."+g.getName().toString());
+						if(rankId > 0){
+							BotManager.api.addClientToServerGroup(rankId, id);
+						}
+					}
+				}
+				User user = api.getUserSafe(p.getUniqueId().toString()).orElse(null);
+				if (user == null) {
+				    return;
+				}
+				UserData userData = user.getUserDataCache().orElse(null);
+				if (userData == null) {
+				    return;
+				}
+				Contexts contexts = api.getContextForUser(user).orElse(null);
+				if (contexts == null) {
+				    return;
+				}
+				PermissionData permissionData = userData.getPermissionData(contexts);
+				Map<String, Boolean> data = permissionData.getImmutableBacking();
+				for(String perms : data.keySet()){
+					if((UltimateTS.g().getConfig().contains("config.perms."+perms)) && (UltimateTS.g().getConfig().get("config.perms."+perms.toString()) != null)){
+						int tsRangIg = UltimateTS.g().getConfig().getInt("config.perms."+perms.toString());
+						if(tsRangIg > 0){
+							BotManager.api.addClientToServerGroup(tsRangIg, id);
+						}
+					}
+				}
+			}else if(permsSystem == UtilsFunctions.getVault()){
+				for(String pRank : UltimateTS.perms.getPlayerGroups(p)){
+					int rankId = UltimateTS.g().getConfig().getInt("config.ranks."+pRank.toString());
+					if(rankId > 0){
+						BotManager.api.addClientToServerGroup(rankId, id);
+					}
+				}
 			}
+			
 		}
 		int asignWR = UltimateTS.g().getConfig().getInt("config.asignWhenregister");
 		if(asignWR > 0){

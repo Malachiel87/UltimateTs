@@ -30,7 +30,6 @@ public class RankManager {
 				if(permsSystem.isEnabled()){
 					
 					System.out.println("Using "+permsSystem.getName()+".");
-					a = 0;
 					UltimateTS.g().getConfig().set("config.asignWhenregister", 0);
 					UltimateTS.g().saveConfig();
 
@@ -38,15 +37,20 @@ public class RankManager {
 						for(PermissionGroup g : PermissionsEx.getPermissionManager().getGroupList()){
 							UltimateTS.g().getConfig().set("config.ranks."+g.getName().toString(), 0);
 							UltimateTS.g().saveConfig();
-							a++;
 						}
 						UltimateTS.g().getConfig().set("config.perms.exemplePerms", 10);
 						UltimateTS.g().saveConfig();
 					}else if(permsSystem == UtilsFunctions.getzPerms()){
-
 						UltimateTS.g().getConfig().set("config.perms.exemplePerms", 10);
 						UltimateTS.g().saveConfig();
-						
+					}else if(permsSystem == UtilsFunctions.getLuckPerms()){
+						UltimateTS.g().getConfig().set("config.perms.exemplePerms", 10);
+						UltimateTS.g().saveConfig();
+					}else if(permsSystem == UtilsFunctions.getVault()){
+						for(String groups : UltimateTS.perms.getGroups()){
+							UltimateTS.g().getConfig().set("config.ranks."+groups.toString(), 0);
+							UltimateTS.g().saveConfig();
+						}
 					}else{
 						UtilsFunctions.log(Level.SEVERE, "No valid permissions system found !");
 						UtilsFunctions.log(Level.SEVERE, "All ranks linking functions are disabled.");
@@ -55,7 +59,7 @@ public class RankManager {
 
 					System.out.println("--------------- [ UltimateTS - Ranks Setup ] ---------------");
 					System.out.println("Starting UltimateTS for the first time ..."); 
-					System.out.println("Syncronization of "+a+" groups successfully!");
+					System.out.println("Syncronization of all groups successfully!");
 					System.out.println("All groups have been added in the configurations.");
 					System.out.println("Go to the configuration to add the values for each groups.");
 					System.out.println("Setup ending!");

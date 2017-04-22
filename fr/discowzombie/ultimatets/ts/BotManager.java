@@ -68,7 +68,7 @@ public class BotManager {
 					if(message.equalsIgnoreCase("$ping")){
 						api.sendChannelMessage("pong!");
 					}else if(message.equalsIgnoreCase("$info")){
-						api.sendChannelMessage("This server use UltimateTS created by DiscowZombie.");
+						api.sendChannelMessage("This server use "+UltimateTS.g().getDescription().getName()+" v"+UltimateTS.g().getDescription().getVersion()+" created by DiscowZombie.");
 					}
 				}
 			}

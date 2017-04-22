@@ -26,7 +26,7 @@ public class TypeYesOrNo implements Listener {
 			if(message.equalsIgnoreCase("YES")){
 				//UNLINK
 				int dbclientId = 0;
-				if(sql.useDataBase()){
+				if(sql != null && sql.useDataBase()){
 					dbclientId = sql.getLinkedId(p.getUniqueId().toString());
 				}else{
 					dbclientId = UltimateTS.g().getConfig().getInt("linked."+p.getUniqueId().toString());

@@ -1,10 +1,10 @@
 main: fr.discowzombie.ultimatets.UltimateTS
 name: UltimateTS
 author: DiscowZombie
-version: 1.4.1
+version: 1.4.3
 description: Interact and link groups with TeamSpeak.
 website: https://www.spigotmc.org/resources/39076/
-soft-depend: [PermissionsEx,zPermissions,Vault]
+soft-depend: [PermissionsEx,zPermissions,Vault,LuckPerms]
 commands:
    ts:
      description: Main command

@@ -27,10 +27,10 @@ public class BotManager {
 		return UltimateTS.g();
 	}
 	
+	public static boolean online = false;
 	public static TS3Api api;
 	final TS3Config config = new TS3Config();
 	final TS3Query query = new TS3Query(config);
-	public static boolean online = false;
 	
 	public void runBot(String ip, String user, String mdp) {
 		config.setHost(ip);

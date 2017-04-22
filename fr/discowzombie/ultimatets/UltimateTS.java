@@ -23,7 +23,7 @@ public class UltimateTS extends JavaPlugin{
 	public SqlRequest sql;
 	String host, dbName, user, password;
 	
-	BotManager bm = new BotManager();
+	BotManager BotManager = new BotManager();
 	
 	public static UltimateTS g(){
 		return i;
@@ -80,7 +80,7 @@ public class UltimateTS extends JavaPlugin{
 		RankManager.scanIGRank();
 		
 		if((getConfig().getString("login.ip") != "") && (getConfig().getString("login.ip") != null)){
-			bm.runBot(getConfig().getString("login.ip"), getConfig().getString("login.username"), getConfig().getString("login.password"));
+			BotManager.runBot(getConfig().getString("login.ip"), getConfig().getString("login.username"), getConfig().getString("login.password"));
 		}
 		
 		log(i.getDescription().getName()+" v"+i.getDescription().getVersion()+" is enabled !");
@@ -94,7 +94,7 @@ public class UltimateTS extends JavaPlugin{
 		if(sql != null && sql.useDataBase() && sql.isConnected()){
 			sql.disconnect();
 		}
-		bm.stopBot();
+		BotManager.stopBot();
 		super.onDisable();
 	}
 

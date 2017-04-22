@@ -69,7 +69,7 @@ public class UltimateTSCmd implements CommandExecutor {
 						confirmationReady.add(p);
 						p.sendMessage(UltimateTS.g().getConfig().getString("messages.unlinked.confirmation.confirmation").replace('&', '§')); 
 					}else{
-						p.sendMessage(UltimateTS.g().getConfig().getString("messages.unlinked.confirmation.already").replace('&', '§')); 
+						p.sendMessage(UltimateTS.g().getConfig().getString("messages.unlinked.already").replace('&', '§')); 
 					}
 				}else if(args[0].equalsIgnoreCase("status")){
 					if(UtilsFunctions.isLinked(p)){

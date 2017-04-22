@@ -3,7 +3,7 @@ package fr.discowzombie.ultimatets.functions;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
@@ -11,6 +11,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.tyrannyofheaven.bukkit.zPermissions.ZPermissionsPlugin;
 import com.github.theholywaffle.teamspeak3.api.ClientProperty;
@@ -19,9 +20,7 @@ import com.github.theholywaffle.teamspeak3.api.wrapper.DatabaseClientInfo;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ServerGroup;
 import fr.discowzombie.ultimatets.UltimateTS;
 import fr.discowzombie.ultimatets.ts.BotManager;
-import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.Contexts;
-import me.lucko.luckperms.api.Group;
 import me.lucko.luckperms.api.LuckPermsApi;
 import me.lucko.luckperms.api.User;
 import me.lucko.luckperms.api.caching.PermissionData;
@@ -215,34 +214,26 @@ public class UtilsFunctions {
 					}
 				}
 			}else if(permsSystem == UtilsFunctions.getLuckPerms()){
-				LuckPermsApi api = LuckPerms.getApi();
-				for(Group g : api.getGroups()){
-					if(p.hasPermission("group."+g.getName().toString())){
-						int rankId = UltimateTS.g().getConfig().getInt("config.perms."+g.getName().toString());
-						if(rankId > 0){
-							BotManager.api.addClientToServerGroup(rankId, id);
-						}
-					}
+				LuckPermsApi api = null;
+				ServicesManager manager = Bukkit.getServicesManager();
+				if(manager.isProvidedFor(LuckPermsApi.class)){
+				    api = manager.getRegistration(LuckPermsApi.class).getProvider();
 				}
-				User user = api.getUserSafe(p.getUniqueId().toString()).orElse(null);
-				if (user == null) {
-				    return;
-				}
+				User user = api.getUserSafe(p.getName()).orElse(null);
+				if (user == null) return;
 				UserData userData = user.getUserDataCache().orElse(null);
-				if (userData == null) {
-				    return;
-				}
+				if (userData == null) return;
 				Contexts contexts = api.getContextForUser(user).orElse(null);
-				if (contexts == null) {
-				    return;
-				}
+				if (contexts == null) return;
 				PermissionData permissionData = userData.getPermissionData(contexts);
-				Map<String, Boolean> data = permissionData.getImmutableBacking();
-				for(String perms : data.keySet()){
-					if((UltimateTS.g().getConfig().contains("config.perms."+perms)) && (UltimateTS.g().getConfig().get("config.perms."+perms.toString()) != null)){
-						int tsRangIg = UltimateTS.g().getConfig().getInt("config.perms."+perms.toString());
-						if(tsRangIg > 0){
-							BotManager.api.addClientToServerGroup(tsRangIg, id);
+				for(Entry<String, Boolean> pe : permissionData.getImmutableBacking().entrySet()){
+					if(pe.getValue()){
+						String perms = pe.getKey();
+						if(UltimateTS.g().getConfig().contains("config.perms."+perms.toString())){
+							int rankId = UltimateTS.g().getConfig().getInt("config.perms."+perms.toString());
+							if(rankId > 0){
+								BotManager.api.addClientToServerGroup(rankId, id);
+							}
 						}
 					}
 				}

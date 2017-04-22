@@ -10,6 +10,10 @@ import fr.discowzombie.ultimatets.UltimateTS;
 
 public class SqlRequest {
 	
+	public static UltimateTS m(){
+		return UltimateTS.g();
+	}
+	
 	public Connection connection;
     private String urlbase, host, database, user, pass;
    
@@ -27,7 +31,7 @@ public class SqlRequest {
         if(!isConnected()){
             try {
                 connection = DriverManager.getConnection(urlbase + host + "/" + database, user, pass);
-                System.out.println("(SQL) Connection successfully.");
+                m().logP("(SQL)", "Connection successfully.");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -38,7 +42,7 @@ public class SqlRequest {
         if(isConnected()){
             try {
                 connection.close();
-                System.out.println("(SQL) Successfully disconnected.");
+                m().logP("(SQL)", "Successfully disconnected.");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -55,7 +59,7 @@ public class SqlRequest {
 				PreparedStatement q = connection.prepareStatement("CREATE TABLE `"+database+"`.`UltimateTS_linkedplayers` ( `id` INT(16) NOT NULL AUTO_INCREMENT , `uuid` VARCHAR(255) NOT NULL , `dbId` INT(16) NOT NULL, PRIMARY KEY `id`(`id`) ) ENGINE = InnoDB;");
 				q.executeUpdate();
 				q.close();
-				System.out.println("(SQL) Table UltimateTS_linkedplayers created succesfully!");
+				m().logP("(SQL)", "Table UltimateTS_linkedplayers created succesfully!");
 			}
 		}catch (SQLException e){
 			e.printStackTrace();

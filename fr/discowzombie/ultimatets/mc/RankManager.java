@@ -12,6 +12,10 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class RankManager {
 	
+	public static UltimateTS m(){
+		return UltimateTS.g();
+	}
+	
 	static int a = 0;
 	
 	public static void scanIGRank(){
@@ -52,8 +56,8 @@ public class RankManager {
 							UltimateTS.g().saveConfig();
 						}
 					}else{
-						UtilsFunctions.log(Level.SEVERE, "No valid permissions system found !");
-						UtilsFunctions.log(Level.SEVERE, "All ranks linking functions are disabled.");
+						m().log(Level.WARNING, "No valid permissions system found !");
+						m().log(Level.WARNING, "All ranks linking functions are disabled.");
 						return;
 					}
 
@@ -66,8 +70,8 @@ public class RankManager {
 					System.out.println("--------------- [ UltimateTS - Ranks Setup ] ---------------");
 					Bukkit.getServer().shutdown();
 				}else{
-					UtilsFunctions.log(Level.WARNING, "No valid permissions system found !");
-					UtilsFunctions.log(Level.WARNING, "All ranks linking functions are disabled.");
+					m().log(Level.WARNING, "No valid permissions system found !");
+					m().log(Level.WARNING, "All ranks linking functions are disabled.");
 					UltimateTS.g().getConfig().set("config.asignWhenregister", 0);
 					UltimateTS.g().saveConfig();
 					Bukkit.getServer().shutdown();
@@ -75,8 +79,8 @@ public class RankManager {
 
 			}else{
 				//NO PERMS SYSTEM FOUND
-				UtilsFunctions.log(Level.WARNING, "No permissions system found !");
-				UtilsFunctions.log(Level.WARNING, "All ranks linking functions are disabled.");
+				m().log(Level.WARNING, "No permissions system found !");
+				m().log(Level.WARNING, "All ranks linking functions are disabled.");
 				UltimateTS.g().getConfig().set("config.asignWhenregister", 0);
 				UltimateTS.g().saveConfig();
 				Bukkit.getServer().shutdown();

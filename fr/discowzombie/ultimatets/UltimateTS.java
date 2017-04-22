@@ -18,11 +18,11 @@ import net.milkbowl.vault.permission.Permission;
 public class UltimateTS extends JavaPlugin{
 	
 	public static HashMap<Player, String> p = new HashMap<>();
-	String host, dbName, user, password;
-	public SqlRequest sql;
 	public static Permission perms;
-	
 	public static UltimateTS i;
+	public SqlRequest sql;
+	String host, dbName, user, password;
+	
 	BotManager bm = new BotManager();
 	
 	public static UltimateTS g(){
@@ -35,6 +35,10 @@ public class UltimateTS extends JavaPlugin{
 	
 	public void log(Level lvl, String message){
 		getLogger().log(lvl, message);
+	}
+	
+	public void logP(String prefix, String message){
+		System.out.println(prefix + " " + message);
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -63,10 +67,11 @@ public class UltimateTS extends JavaPlugin{
 	        sql.createTables();
 		}
 		
-		if(sql != null) System.out.println("(SQL) Use database: "+sql.useDataBase());
-		else System.out.println("(SQL) Use database: false");
+		if(sql != null) logP("(SQL)", "Use database: "+sql.useDataBase());
+		else logP("(SQL)", "Use database: false");
 		
 		saveConfig();
+		
 		getCommand("ts").setExecutor(new UltimateTSCmd(sql));
 		getServer().getPluginManager().registerEvents(new TypeYesOrNo(sql), this);
 		

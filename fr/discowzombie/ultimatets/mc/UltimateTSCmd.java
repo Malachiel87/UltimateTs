@@ -65,11 +65,11 @@ public class UltimateTSCmd implements CommandExecutor {
 					}
 				}else if(args[0].equalsIgnoreCase("unlink")){
 					if(UtilsFunctions.isLinked(p)){
-						//WRITE YES OR NO INTO CHAT (WITHOUT) /
+						//WRITE YES OR NO INTO CHAT (WITHOUT)
 						confirmationReady.add(p);
 						p.sendMessage(UltimateTS.g().getConfig().getString("messages.unlinked.confirmation.confirmation").replace('&', '§')); 
 					}else{
-						p.sendMessage(UltimateTS.g().getConfig().getString("messages.unlinked.confirmation.confirmation").replace('&', '§')); 
+						p.sendMessage(UltimateTS.g().getConfig().getString("messages.unlinked.confirmation.already").replace('&', '§')); 
 					}
 				}else if(args[0].equalsIgnoreCase("status")){
 					if(UtilsFunctions.isLinked(p)){
@@ -89,10 +89,8 @@ public class UltimateTSCmd implements CommandExecutor {
 						if(args.length == 1){
 							p.sendMessage(UltimateTS.g().getConfig().getString("messages.list.empty").replace('&', '§'));
 						}else if((args.length == 2) && (args[1].equalsIgnoreCase("TS"))){
-							//Ts online players
 							UtilsFunctions.getAndBroadcastTSClients(p);
 						}else if((args.length == 2) && (args[1].equalsIgnoreCase("IG"))){
-							//IG online players
 							UtilsFunctions.getAndBroadcastIGClients(p);
 						}
 					}else{

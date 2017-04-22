@@ -32,64 +32,64 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class UtilsFunctions {
 	
-	public static void log(Level lvl, String message){
-		UltimateTS.g().getLogger().log(lvl, message);
+	public static UltimateTS m(){
+		return UltimateTS.g();
 	}
 	
 	public static JavaPlugin getPermissionSystem(boolean displayInConsole){
 		
 		String permsS = UltimateTS.g().getConfig().getString("config.permsSystem");
 		if((permsS != null) && (permsS.equalsIgnoreCase("PEX"))){
-			if(displayInConsole) log(Level.INFO, "Checking for PermissionsEx...");
+			if(displayInConsole) m().log(Level.INFO, "Checking for PermissionsEx...");
 			try{
 				boolean pexS = Bukkit.getServer().getPluginManager().isPluginEnabled("PermissionsEx");
 				if(pexS){
-					if(displayInConsole) log(Level.INFO, "PermissionsEx found !");
+					if(displayInConsole) m().log(Level.INFO, "PermissionsEx found !");
 					return (JavaPlugin) Bukkit.getServer().getPluginManager().getPlugin("PermissionsEx");
 				}else{
-					if(displayInConsole) log(Level.SEVERE, "PermissionsEx not found !");
+					if(displayInConsole) m().log(Level.SEVERE, "PermissionsEx not found !");
 				}
 			}catch(Exception e){}
 			
 		}else if(permsS != null && permsS.equalsIgnoreCase("zPerms")){
-			if(displayInConsole) log(Level.INFO, "Checking for zPermissions...");
+			if(displayInConsole) m().log(Level.INFO, "Checking for zPermissions...");
 			try{
 				boolean zPerms = Bukkit.getServer().getPluginManager().isPluginEnabled("zPermissions");
 				if(zPerms){
-					if(displayInConsole) log(Level.INFO, "zPermissions found !");
+					if(displayInConsole) m().log(Level.INFO, "zPermissions found !");
 					return (JavaPlugin) Bukkit.getServer().getPluginManager().getPlugin("zPermissions");
 				}else{
-					if(displayInConsole) log(Level.SEVERE, "zPermissions not found !");
+					if(displayInConsole) m().log(Level.SEVERE, "zPermissions not found !");
 				}
 			}catch(Exception e){}
 			
 		}else if(permsS != null && permsS.equalsIgnoreCase("LuckPerms")){
-			if(displayInConsole) log(Level.INFO, "Checking for LuckPerms...");
+			if(displayInConsole) m().log(Level.INFO, "Checking for LuckPerms...");
 			try{
 				boolean lperms = Bukkit.getServer().getPluginManager().isPluginEnabled("LuckPerms");
 				if(lperms){
-					if(displayInConsole) log(Level.INFO, "LuckPerms found !");
+					if(displayInConsole) m().log(Level.INFO, "LuckPerms found !");
 					return (JavaPlugin) Bukkit.getServer().getPluginManager().getPlugin("LuckPerms");
 				}else{
-					if(displayInConsole) log(Level.SEVERE, "LuckPerms not found !");
+					if(displayInConsole) m().log(Level.SEVERE, "LuckPerms not found !");
 				}
 			}catch(Exception e){}
 			
 		}else if(permsS != null && permsS.equalsIgnoreCase("Vault")){
-			if(displayInConsole) log(Level.INFO, "Checking for Vault...");
+			if(displayInConsole) m().log(Level.INFO, "Checking for Vault...");
 			try{
 				boolean vault = Bukkit.getServer().getPluginManager().isPluginEnabled("Vault");
 				if(vault){
-					if(displayInConsole) log(Level.INFO, "Vault found !");
+					if(displayInConsole) m().log(Level.INFO, "Vault found !");
 					return (JavaPlugin) Bukkit.getServer().getPluginManager().getPlugin("Vault");
 				}else{
-					if(displayInConsole) log(Level.SEVERE, "Vault not found !");
+					if(displayInConsole) m().log(Level.SEVERE, "Vault not found !");
 				}
 			}catch(Exception e){}
 			
 		}else{
-			if(displayInConsole) log(Level.WARNING, "No valid permissions system found !");
-			if(displayInConsole) log(Level.WARNING, "All ranks linking functions are disabled.");
+			if(displayInConsole) m().log(Level.WARNING, "No valid permissions system found !");
+			if(displayInConsole) m().log(Level.WARNING, "All ranks linking functions are disabled.");
 		}
 		return null;
 	}
@@ -330,7 +330,6 @@ public class UtilsFunctions {
 				p.sendMessage(UltimateTS.g().getConfig().getString("messages.list.broadcast.ig.linked.linked").replace('&', '§')
 						.replace("%name%", name)
 						.replace("%id%", id+""));
-				
 			}else{
 				p.sendMessage(UltimateTS.g().getConfig().getString("messages.list.broadcast.ig.linked.nolinked").replace('&', '§'));
 			}

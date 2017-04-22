@@ -23,6 +23,10 @@ import fr.discowzombie.ultimatets.mc.UltimateTSCmd;
 
 public class BotManager {
 	
+	public UltimateTS m(){
+		return UltimateTS.g();
+	}
+	
 	public static TS3Api api;
 	final TS3Config config = new TS3Config();
 	final TS3Query query = new TS3Query(config);
@@ -37,7 +41,7 @@ public class BotManager {
 			Bukkit.getServer().getPluginManager().disablePlugin(UltimateTS.g());
 			return;
 		}
-		System.out.println("(TeamSpeak) "+UltimateTS.g().getConfig().getString("messages.bot.online"));
+		m().logP("(TeamSpeak)", UltimateTS.g().getConfig().getString("messages.bot.online"));
 		online = true;
 
 		api = query.getApi();

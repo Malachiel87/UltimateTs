@@ -23,7 +23,7 @@ public class TypeYesOrNo implements Listener {
 		Player p = e.getPlayer();
 		if(UltimateTSCmd.confirmationReady.contains(p)){
 			String message = e.getMessage();
-			if(message.equalsIgnoreCase("YES")){
+			if((message != null) && (message.equalsIgnoreCase("YES"))){
 				//UNLINK
 				int dbclientId = 0;
 				if(sql != null && sql.useDataBase()){
@@ -43,7 +43,8 @@ public class TypeYesOrNo implements Listener {
 	
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e){
-		if(UltimateTSCmd.confirmationReady.contains(e.getPlayer())) UltimateTSCmd.confirmationReady.remove(e.getPlayer()); 
+		Player p = e.getPlayer();
+		if(UltimateTSCmd.confirmationReady.contains(p)) UltimateTSCmd.confirmationReady.remove(p); 
 	}
 
 }

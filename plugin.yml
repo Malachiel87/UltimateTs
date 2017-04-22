@@ -4,7 +4,7 @@ author: DiscowZombie
 version: 1.4.3
 description: Interact and link groups with TeamSpeak.
 website: https://www.spigotmc.org/resources/39076/
-soft-depend: [PermissionsEx,zPermissions,Vault,LuckPerms]
+soft-depend: [PermissionsEx, zPermissions, Vault, LuckPerms]
 commands:
    ts:
      description: Main command

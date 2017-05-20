@@ -1,14 +1,14 @@
-main: fr.discowzombie.ultimatets.UltimateTS
-name: UltimateTS
+main: ultimatets.UltimateTs
+name: UltimateTs
 author: DiscowZombie
-version: 1.4.4
+version: 2.0.0
 description: Interact and link groups with TeamSpeak.
 website: https://www.spigotmc.org/resources/39076/
 soft-depend: [PermissionsEx, zPermissions, Vault, LuckPerms]
 commands:
-   ts:
+   teamspeak:
      description: Main command
-     aliases: teamspeak
+     aliases: ts
      usage: /<command> [link][unlink][status][broadcast][list]
 permissions:
    ultimatets.*:
@@ -16,8 +16,15 @@ permissions:
      default: op
      children:
        ultimatets.broadcast: true
-       ultimatets.list: true
+       ultimatets.list.*: truee
    ultimatets.broadcast:
      description: Broadcast a message on TeamSpeak.
-   ultimatets.list:
-     description: Display list of players.
+   ultimatets.list.*:
+     description: View all players online on TeamSpeak and Minecraft.
+     children:
+       ultimatets.list.teamspeak: true
+       ultimatets.list.minecraft: true
+   ultimatets.list.teamspeak:
+     description: View all players online on TeamSpeak.
+   ultimatets.list.minecraft:
+     description: View all players online on Minecraft.

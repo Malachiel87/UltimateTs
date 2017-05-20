@@ -1,0 +1,40 @@
+messages:
+  poke: '[color=red]You need to register yourself before join TeamSpeak. Use ''/ts link'' IG to link your accounts.'
+  kick: 'Please register yourself !'
+  bot:
+    online: 'Bot Online!'
+    offline: 'Bot Offline!'
+  database:
+    online: 'Connection successfully.'
+    offline: 'Successfully disconnected.' 
+  linked:
+    sucess: '&bYour TeamSpeak and Minecraft are now linked ! Your MC Name is %mcname%.'
+    ready: '&bYour MC account is ready to be link ! Log in into TeamSpeak and get your accounts linked !'
+    desc: 'MC Name: %mcname%'
+    already: '&aYour MC and TeamSpeak are always linked, use /ts unlink to link it.'
+    linked: '&aYour MC and TeamSpeak are linked. Use /ts unlink to unlink-it.'
+    info: '&bYour TeamSpeak name is %tsname% (DbId: %dbid%).'
+  unlinked:
+    confirmation:
+      confirmation: '&cWarning: Unlink you MC and TeamSpeak account removed all your servergroups
+        on TeamSpeak. Do you really want to continue ? If yes, type ''YES'' in chat
+        (WITHOUT SLASH), else type ''NO''. '
+      'yes': '&aReceived reponse YES. &rYour MC and TeamSpeak are now unlinked !'
+      'no': '&cReceived reponse NO, canceled.'
+    already: '&cYour MC and TeamSpeak aren''t linked yet!'
+    unlinked: '&bYour MC and TeamSpeak account aren''t linked. Use /ts link to link-it.'
+  broadcast:
+    empty: '&cYour message can''t be empty.'
+    to:
+      teamspeak: '%message%.'
+      minecraft: '(TeamSpeak) %message%.'
+      sender: 'You broadcast this message on TeamSpeak: %message%.'
+  list:
+    minecraft: 
+      size: '§2There are %n players online:'
+      player: '&8- &f%player% &8- &7%uuid%'  
+      false: '  &7Linked: &c%linked_true_false%'
+      true: '  &7Linked: &a%linked_true_false% §7with &b%linked_name% &8(&7%dbid%&8)'
+    teamspeak: 
+      size: '§2There are %n players online:'
+      user: '&8- &f%name% &8(&7%dbid%&8)'

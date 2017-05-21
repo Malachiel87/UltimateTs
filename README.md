@@ -24,9 +24,9 @@ TeamSpeak commands:
 
 -- Permissions --
 
-    ultimatets.*: Gives access to all UltimateTS commands ;
+    ultimatets.all: Gives access to all UltimateTS commands ;
     ultimatets.broadcast: Allowed using /ts broadcast ;
-    ultimatets.list.*: View all players online on TeamSpeak and Minecraft ;
+    ultimatets.list.all: View all players online on TeamSpeak and Minecraft ;
     ultimatets.list.teamspeak: View all players online on TeamSpeak ;
     ultimatets.list.minecraft: View all players online on Minecraft ;
 

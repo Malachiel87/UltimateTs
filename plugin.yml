@@ -1,7 +1,7 @@
 main: ultimatets.UltimateTs
 name: UltimateTs
 author: DiscowZombie
-version: 2.0.0
+version: 2.0.1
 description: Interact and link groups with TeamSpeak.
 website: https://www.spigotmc.org/resources/39076/
 soft-depend: [PermissionsEx, zPermissions, Vault, LuckPerms]
@@ -11,15 +11,15 @@ commands:
      aliases: ts
      usage: /<command> [link][unlink][status][broadcast][list]
 permissions:
-   ultimatets.*:
+   ultimatets.all:
      description: Gives access to all UltimateTS commands
      default: op
      children:
        ultimatets.broadcast: true
-       ultimatets.list.*: truee
+       ultimatets.list.all: true
    ultimatets.broadcast:
      description: Broadcast a message on TeamSpeak.
-   ultimatets.list.*:
+   ultimatets.list.all:
      description: View all players online on TeamSpeak and Minecraft.
      children:
        ultimatets.list.teamspeak: true

@@ -16,7 +16,7 @@ import ultimatets.teamspeak.BotManager;
 import ultimatets.utils.Utils;
 import ultimatets.utils.enums.UtilsStorage;
 
-public class PlayerManager {
+public abstract class PlayerManager {
 	
 	public static ArrayList<Player> confirmationReady = new ArrayList<>();
 	public static HashMap<String, Player> linkedWaiting = new HashMap<>();
@@ -121,6 +121,38 @@ public class PlayerManager {
 		int groupToAssign = UltimateTs.main().getConfig().getInt("config.assignWhenRegister");
 		if(groupToAssign > 0){
 			BotManager.getBot().addClientToServerGroup(groupToAssign, tsDbId);
+		}
+	}
+	
+	public static void updateRanks(Player p){
+		if(isLinked(p)){
+			int tsDbId = getLinkedWithDbId(p);
+			
+			//Perms
+			for(PermissionAttachmentInfo pai : p.getEffectivePermissions()) {
+				String perms = pai.getPermission();
+				if(UltimateTs.main().getConfig().get("perms."+perms) != null){
+					int gTs = UltimateTs.main().getConfig().getInt("perms."+perms);
+					DatabaseClientInfo cdi = BotManager.getBot().getDatabaseClientInfo(tsDbId);
+					for(int lsg : BotManager.getBot().getClientByUId(cdi.getUniqueIdentifier()).getServerGroups()){
+						if(gTs != lsg){
+							BotManager.getBot().addClientToServerGroup(gTs, tsDbId);
+						}
+					}
+				}
+		    }
+			
+			//Default Ranks
+			int groupToAssign = UltimateTs.main().getConfig().getInt("config.assignWhenRegister");
+			DatabaseClientInfo cdi = BotManager.getBot().getDatabaseClientInfo(tsDbId);
+			for(int lsg : BotManager.getBot().getClientByUId(cdi.getUniqueIdentifier()).getServerGroups()){
+				if(groupToAssign != lsg){
+					if(groupToAssign > 0){
+						BotManager.getBot().addClientToServerGroup(groupToAssign, tsDbId);
+					}
+				}
+			}
+
 		}
 	}
 	

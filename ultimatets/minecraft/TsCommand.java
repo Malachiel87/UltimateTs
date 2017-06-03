@@ -83,6 +83,22 @@ public class TsCommand implements CommandExecutor {
 					}else{
 						displayHelp(p);
 					}
+				}else if(args[0].equalsIgnoreCase("update")){
+					if(args.length == 2){
+						if(args[1].equalsIgnoreCase("ALL")){
+							p.sendMessage("§cArgument '"+args[1]+"' not working on this version, wait an update...");
+						}else{
+							Player cible = Bukkit.getServer().getPlayer(args[1]);
+							if(PlayerManager.isLinked(cible)){
+								p.sendMessage(UltimateTs.messages.getString("messages.update.player").replace('&', '§').replace("%player%", cible.getName()));
+								PlayerManager.updateRanks(cible);
+							}else{
+								p.sendMessage(UltimateTs.messages.getString("messages.update.nolink").replace('&', '§').replace("%player%", cible.getName()));
+							}
+						}
+					}else{
+						displayHelp(p);
+					}
 				}
 			}else{
 				displayHelp(p);
@@ -137,6 +153,7 @@ public class TsCommand implements CommandExecutor {
 		p.sendMessage("* §e/ts unlink§7: §rUnlink your accounts.");
 		if(p.hasPermission("ultimatets.broadcast")) p.sendMessage("* §e/ts broadcast <message>§7: §rBroadcast a message on TeamSpeak.");
 		if(p.hasPermission("ultimatets.list.minecraft") || p.hasPermission("ultimatets.list.teamspeak")) p.sendMessage("* §e/ts list (minecraft|teamspeak)§7: §rView all players online on TeamSpeak and Minecraft.");
+		if(p.hasPermission("ultimatets.update")) p.sendMessage("* §e/ts update {player|ALL}§7: §rUpdate player servers groups with new permissions.");
 	}
 
 }

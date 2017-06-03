@@ -15,6 +15,7 @@ config:
   kickNotRegister: false
   defaultGroupId: 8
   assignWhenRegister: 0
+  yesReponse: 'YES'
 perms:
   myPermission: 7
   group.admin: 2

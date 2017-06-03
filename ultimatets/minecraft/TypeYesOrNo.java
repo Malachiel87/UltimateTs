@@ -22,7 +22,9 @@ public class TypeYesOrNo implements Listener {
 			String message = e.getMessage();
 			if(message == null) return;
 			
-			if(message.equalsIgnoreCase("YES")){
+			String rep = UltimateTs.main().getConfig().getString("config.yesReponse");
+			if(rep == null) rep = "YES";
+			if(message.equalsIgnoreCase(rep.toString())){
 				BotManager.getBot().editClient(PlayerManager.convertDatabaseIdToClientId(PlayerManager.getLinkedWithDbId(p)), Collections.singletonMap(ClientProperty.CLIENT_DESCRIPTION, ""));
 				p.sendMessage(UltimateTs.messages.getString("messages.unlinked.confirmation.yes").replace('&', '§'));
 				PlayerManager.unlink(p);

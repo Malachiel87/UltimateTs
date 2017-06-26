@@ -1,7 +1,7 @@
 main: ultimatets.UltimateTs
 name: UltimateTs
 author: DiscowZombie
-version: 2.1.0
+version: 2.1.2
 description: Interact and link groups with TeamSpeak.
 website: https://www.spigotmc.org/resources/39076/
 soft-depend: [PermissionsEx, zPermissions, LuckPerms, Vault]
@@ -9,7 +9,7 @@ commands:
    teamspeak:
      description: Main command
      aliases: ts
-     usage: /<command> [link][unlink][status][broadcast][list][update]
+     usage: /<command> [ip][link][unlink][status][broadcast][list][update]
 permissions:
    ultimatets.all:
      description: Gives access to all UltimateTS commands

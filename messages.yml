@@ -41,3 +41,6 @@ messages:
   update:
     player: '&aYou updated server groups of %player%.'
     nolink: '&c%player% has never linked his account !'
+  ts:
+    message: '&aJoin our TeamSpeak now: &6%tsip%'
+    displayedIP: 'ts.spigotmc.org'

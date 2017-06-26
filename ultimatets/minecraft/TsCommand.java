@@ -68,6 +68,8 @@ public class TsCommand implements CommandExecutor {
 					}else{
 						p.sendMessage(UltimateTs.messages.getString("messages.unlinked.unlinked").replace('&', '§'));
 					}
+				}else if(args[0].equalsIgnoreCase("ip")){
+					p.sendMessage(UltimateTs.messages.getString("messages.ts.message").replace('&', '§').replace("%tsip%", UltimateTs.messages.getString("messages.ts.displayedIP")));
 				}else if(args[0].equalsIgnoreCase("list")){
 					if(args.length == 1){
 						displayOnMinecraft(p);
@@ -148,6 +150,9 @@ public class TsCommand implements CommandExecutor {
 	public void displayHelp(Player p){
 		p.sendMessage("§6-------- [ UltimateTS ] --------");
 		p.sendMessage("");
+		p.sendMessage(UltimateTs.messages.getString("messages.ts.message").replace('&', '§').replace("%tsip%", UltimateTs.messages.getString("messages.ts.displayedIP")));
+		p.sendMessage("");
+		p.sendMessage("* §e/ts ip§7: §rDisplay TeamSpeak IP address.");
 		p.sendMessage("* §e/ts status§7: §rGet your account linked or not.");
 		p.sendMessage("* §e/ts link§7: §rLink your accounts.");
 		p.sendMessage("* §e/ts unlink§7: §rUnlink your accounts.");

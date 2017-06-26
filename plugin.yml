@@ -1,7 +1,7 @@
 main: ultimatets.UltimateTs
 name: UltimateTs
 author: DiscowZombie
-version: 2.1.2
+version: 2.1.3
 description: Interact and link groups with TeamSpeak.
 website: https://www.spigotmc.org/resources/39076/
 soft-depend: [PermissionsEx, zPermissions, LuckPerms, Vault]

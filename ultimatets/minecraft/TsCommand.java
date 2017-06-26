@@ -64,6 +64,10 @@ public class TsCommand implements CommandExecutor {
 					if(PlayerManager.isLinked(p)){
 						p.sendMessage(UltimateTs.messages.getString("messages.linked.linked").replace('&', '§'));
 						int dbId = PlayerManager.getLinkedWithDbId(p);
+						if(PlayerManager.getClientInfosByDatabaseId(dbId) == null){
+							p.sendMessage(UltimateTs.messages.getString("messages.linked.status").replace('&', '§'));
+							return true;
+						}
 						p.sendMessage(UltimateTs.messages.getString("messages.linked.info").replace('&', '§').replace("%dbid%", dbId+"").replace("%tsname%", PlayerManager.getClientInfosByDatabaseId(dbId).getNickname()));
 					}else{
 						p.sendMessage(UltimateTs.messages.getString("messages.unlinked.unlinked").replace('&', '§'));

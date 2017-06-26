@@ -14,6 +14,7 @@ messages:
     already: '&aYour MC and TeamSpeak are always linked, use /ts unlink to link it.'
     linked: '&aYour MC and TeamSpeak are linked. Use /ts unlink to unlink-it.'
     info: '&bYour TeamSpeak name is %tsname% (DbId: %dbid%).'
+    status: '&cCouldn''t check status of an offline client.'
   unlinked:
     confirmation:
       confirmation: '&cWarning: Unlink you MC and TeamSpeak account removed all your servergroups

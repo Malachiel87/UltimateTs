@@ -6,23 +6,23 @@ When the TeamSpeak and Minecraft accounts are linked, the player have a custom d
 The plugin use this public TeamSpeak 3 Java API: https://github.com/TheHolyWaffle/TeamSpeak-3-Java-API.
 
 
+#Ingame commands:
 
-Ingame commands:
-
+    /ts ip: Display TeamSpeak IP address;
     /ts link: Link your Minecraft and TeamSpeak accounts ;
     /ts unlink: Unlink your Minecraft and TeamSpeak accounts ;
     /ts status: Get if your accounts are linked ;
     /ts broadcast: Broadcast a message on TeamSpeak ;
     /ts list (minecraft|teamspeak): Get a list of online users on Minecraft or on TeamSpeak.
 
-TeamSpeak commands:
+
+#TeamSpeak commands:
 
     $ping: Reply with pong ;
     $info: Send plugin info directly on TeamSpeak ;
 
 
-
--- Permissions --
+#Permissions
 
     ultimatets.all: Gives access to all UltimateTS commands ;
     ultimatets.broadcast: Allowed using /ts broadcast ;
@@ -31,8 +31,7 @@ TeamSpeak commands:
     ultimatets.list.minecraft: View all players online on Minecraft ;
 
 
-
--- Help & support --
+#Help & support
 
 If you need some help, open a new issues on github: https://github.com/DiscowZombie/UltimateTs/issues.
 Source code available: https://github.com/DiscowZombie/UltimateTs.

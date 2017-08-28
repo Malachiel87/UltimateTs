@@ -1,3 +1,6 @@
+IMPORTANTE NOTE - Monday 28/08/17 : Unfortunately, my disponibility doesn't allow me to update and fix issues of this plugin. Updates will be rare, as like fixes (But the project isn't abandoned. I make updates when I get more times). Source code remains accessible and I would continue to accept "Pull Request" and commits them to the master branch. I thank, in advance, all the people who participate in the source code to make the plugin better. 
+
+
 # UltimateTS
 UltimateTs is a simple plugin, allowed you to interact easly with your TeamSpeak server. With UltimateTS, you can link your accounts (and your ranks), send broadcast on TeamSpeak and more !
 You can link your MC accounts and TeamSpeak simply. If you would like to link ranks, you need a permission plugins (like PermissionsEx, zPerms, LuckPerms, Vault,...). You can also choose to link MC accounts and TeamSpeak accounts without linking ranks.

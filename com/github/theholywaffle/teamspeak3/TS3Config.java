@@ -35,7 +35,7 @@ import java.util.logging.Level;
 public class TS3Config {
 
 	private String host = null;
-	private int queryPort = 10011;
+	private int queryPort = 9987;
 	private FloodRate floodRate = FloodRate.DEFAULT;
 	private Level level = Level.WARNING;
 	private boolean debugToFile = false;
